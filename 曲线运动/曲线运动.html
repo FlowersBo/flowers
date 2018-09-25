@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #test {
+            position: absolute;
+            top: 200px;
+            left: 200px;
+            width: 10px;
+            height: 10px;
+            background: deeppink;
+        }
+
+        .box{
+            width: 1px;
+            height: 1px;
+            background: #000;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="test">
+
+</div>
+<script type="text/javascript">
+      var test=document.getElementById('test');
+      var testLeft=test.offsetLeft;
+      var testTop=test.offsetTop;
+      //角度
+    var deg=0;
+    var scale=100;
+    setInterval(function () {
+      deg++;
+      //将角度化为弧度
+        var rad=deg*Math.PI/180;
+        //x方向距离
+        var newLeft=testLeft+rad*scale*0.5;
+        //y方向距离
+        var newTop=testTop+Math.sin(rad)*scale*2;
+        //创建box
+        var box=document.createElement('box');
+        box.className='box';
+        box.style.left=newLeft+'px';
+        box.style.top=newTop+'px';
+        document.body.appendChild(box);
+    },1000/60)
+</script>
+</body>
+</html>

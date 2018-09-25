@@ -1,0 +1,574 @@
+    html,body{height: 100%;overflow: hidden;}
+    html,body,h1,h2,h3,h4,h5,h6,p,ul,li{margin: 0px;padding: 0px;font: 14px "微软雅黑";}
+    a{text-decoration: none;display: block; cursor: pointer;}
+    li{list-style: none;}
+    img{display: block;}
+    .clearfix{*zoom: 1;}
+    .clearfix:after{content: "";display: block;clear: both;}
+
+
+
+    /*公共样式区*/
+    .commonTitle{
+        color:#009ee0;
+        font-size:80px;
+        line-height:0.8;
+        font-weight:bold;
+        letter-spacing:-5px;
+    }
+    .commonText{
+        color:white;
+        line-height:1.5;
+        font-size:15px;
+    }
+    #wrap{
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+    #header{
+        width: 100%;
+        height: 80px;
+        position: relative;
+    }
+    #header .headerMain{
+        width: 1100px;
+        height: 100%;
+        margin: 0 auto;
+    }
+    #header .headerMain .logo{
+        float: left;
+        margin-top: 15px;
+    }
+    #header .headerMain .nav{
+        float: right;
+        margin-top: 50px;
+    }
+    #header .headerMain .nav li{
+        float: left;
+        margin-left: 40px;
+        position: relative;
+    }
+    #header .headerMain .nav li .up{
+        position: absolute;
+        left:0;
+        top: 0;
+        color: #000	;
+        width: 0;
+        transition: width 1s;
+        overflow: hidden;
+    }
+    #header .headerMain .nav li .down{
+        color: #009EE0;
+    }
+    #header .headerMain .nav li :hover .up{
+        width: 100%;
+    }
+    /*小箭头*/
+    #header .headerMain .arrow{
+        width: 21px;
+        height: 11px;
+        background-image: url('../../img/arrow.png');
+        background-repeat:no-repeat;
+        position: absolute;
+        left: 50%;
+        bottom: -11px;
+        transition: left 1s;
+        z-index: 1111;
+    }
+    #content{
+        position: absolute;
+        top: 80px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        background: pink;
+    }
+    #content .contentMain{
+        width: 100%;
+        height: 500%;
+        position: absolute;
+        top: 0;
+        transition: top 1s;
+    }
+    #content .contentMain>li{
+        position: relative;
+        width: 100%;
+        height: 20%;
+        overflow: hidden;
+    }
+    #content .contentMain>li>section {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -550px;
+        margin-top: -260px;
+        width: 1100px;
+        height: 520px;
+    }
+    #content .contentMain>li:nth-child(1){
+        background-image: url('../../img/bg1.jpg');
+    }
+    #content .contentMain>li:nth-child(2){
+        background-image: url('../../img/bg2.jpg');
+    }
+    #content .contentMain>li:nth-child(3){
+        background-image: url('../../img/bg3.jpg');
+    }
+    #content .contentMain>li:nth-child(4){
+        background-image: url('../../img/bg4.jpg');
+    }
+    #content .contentMain>li:nth-child(5){
+        background-image: url('../../img/bg5.jpg');
+    }
+     /*第一屏轮播*/
+    #content .contentMain .home{
+     }
+     /*小圆点*/
+    #content .contentMain .home .home_point{
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    #content .contentMain .home .home_point li{
+        width: 20px;
+        height: 20px;
+        background: rgba(255,255,255,.8);
+        margin: 2px;
+        border-radius:50% ;
+        box-shadow:0 0 4px rgba(25,25,25,0.8);
+        float: left;
+    }
+    #content .contentMain .home .home_point li.active{
+        background: #fff;
+    }
+     /*图片*/
+    #content .contentMain .home .home_carousel{
+         width: 100%;
+         height: 100%;
+         position: relative;
+         transform-style: preserve-3d;
+         perspective: 1000px;
+         transition: opacity 1s, transform 1s;
+     }
+    #content .contentMain .home .home_carousel li{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #ffffff;
+        text-align: center;
+        line-height: 520px;
+        visibility: hidden;
+    }
+    #content .contentMain .home .home_carousel li:nth-child(1){
+        background:#dc6c5f;
+    }
+    #content .contentMain .home .home_carousel li:nth-child(2){
+        background:#95dc84;
+    }
+    #content .contentMain .home .home_carousel li:nth-child(3){
+        background:#64b9d2;
+    }
+    #content .contentMain .home .home_carousel li:nth-child(4){
+        background:#000000;
+    }
+    /*第一个li显示*/
+    #content .contentMain .home .home_carousel li.active{
+        visibility: visible;
+    }
+    /*
+  点击左边的小圆点时：
+    左边：向左位移，旋转30deg，隐藏到显示
+    右边：向右位置，旋转-30deg，显示到隐藏
+ */
+    @keyframes leftShow {
+        0% {visibility: hidden;transform: translateZ(-200px)}
+        50%{transform: translateX(-40%) rotateY(30deg) scale(0.8)}
+        100%{visibility: visible}
+    }
+    @keyframes rightHide{
+        0% {visibility: visible}
+        50%{transform: translateX(40%) rotateY(-30deg) scale(0.8)}
+        100%{visibility: hidden;transform: translateZ(-200px)}
+    }
+    #content .contentMain .home .home_carousel li.leftShow{
+        visibility: visible;
+        animation:leftShow 2s linear;
+    }
+    #content .contentMain .home .home_carousel li.rightHide{
+        visibility: hidden;
+        animation: rightHide 2s linear;
+    }
+        /*
+    点击右边的小圆点时：
+      左边：向左位移，旋转30deg，显示到隐藏
+      右边：向右位置，旋转-30deg，隐藏到显示
+    */
+    @keyframes leftHide {
+        0% {visibility: visible}
+        50%{transform: translateX(-40%) rotateY(30deg) scale(0.8)}
+        100%{visibility: hidden;transform: translateZ(-200px)}
+    }
+    @keyframes rightShow{
+        0% {visibility: hidden;transform: translateZ(-200px)}
+        50%{transform: translateX(40%) rotateY(-30deg) scale(0.8)}
+        100%{visibility: visible}
+    }
+    #content .contentMain .home .home_carousel li.leftHide{
+        visibility: hidden;
+        animation:leftHide 2s linear;
+    }
+    #content .contentMain .home .home_carousel li.rightShow{
+        visibility: visible;
+        animation: rightShow 2s linear;
+    }
+
+    /*第二屏*/
+    #content .contentMain .course .course_title{
+        margin: 50px;
+        position: relative;
+        z-index: 5;
+    }
+    #content .contentMain .course .course_text{
+        width: 400px;
+        height: 400px;
+        margin-left: 50px;
+        position: relative;
+        z-index: 5;
+    }
+    #content .contentMain .course .course_photo{
+        width: 480px;
+        position: absolute;
+        top: 70px;
+        right: 50px;
+        z-index: 5;
+    }
+    #content .contentMain .course .course_photo li{
+        float: left;
+        width: 120px;
+        height: 132px;
+        position: relative;
+    }
+    #content .contentMain .course .course_photo li .front{
+        background-image: url("../../img/pcwelt.png");
+        background-repeat:no-repeat;
+        background-position: center;
+        width:100%;
+        height: 100%;
+        transition:transform 2s;
+        position: absolute;
+        top: 0;
+        left: 0;
+        backface-visibility: hidden;  /*隐藏背面*/
+    }
+    #content .contentMain .course .course_photo li .back{
+        background: #009ee0;
+        padding: 15px;
+        box-sizing: border-box;
+        width:100%;
+        height: 100%;
+        transform: rotateY(180deg);
+        transition:transform 2s;
+        backface-visibility: hidden;  /*隐藏背面*/
+
+    }
+    #content .contentMain .course .course_photo li:hover .front{
+        transform: rotateY(180deg);
+    }
+    #content .contentMain .course .course_photo li:hover .back{
+        transform: rotateY(360deg);
+    }
+    #content .contentMain .course .line{
+        position: absolute;
+        top: -5px;
+        width: 9px;
+        height: 410px;
+        background-image: url("../../img/plus_row.png");
+        background-repeat: no-repeat;
+    }
+    #content .contentMain .course .line:nth-child(1){left: -6px;}
+    #content .contentMain .course .line:nth-child(2){left: 114px;}
+    #content .contentMain .course .line:nth-child(3){left: 234px;}
+    #content .contentMain .course .line:nth-child(4){left: 354px;}
+    #content .contentMain .course .line:nth-child(5){left: 474px;}
+
+    /*飞机*/
+    .plane1{ width:359px; height:283px; background:url(../../img/plane1.png) no-repeat; position:absolute; left:300px; top:-100px; transition:1s;}
+    .plane2{ width:309px; height:249px; background:url(../../img/plane2.png) no-repeat; position:absolute; left:-100px; top:200px; transition:1s;}
+    .plane3{ width:230px; height:182px; background:url(../../img/plane3.png) no-repeat; position:absolute; left:300px; top:400px; transition:1s;}
+
+    /*第三屏*/
+    #content .contentMain .works .works_title{
+        margin: 50px 0 100px 50px;
+        position: relative;
+        z-index: 5;
+    }
+    #content .contentMain .works .works_list{
+        margin-left: 50px;
+    }
+    #content .contentMain .works .works_list li{
+        width: 220px;
+        height: 133px;
+        float: left;
+        margin-right: 1px;
+        position: relative;
+        overflow: hidden;
+        z-index: 5;
+    }
+    #content .contentMain .works .works_list li:last-child{
+        width: 332px;
+    }
+    #content .contentMain .works .works_list li .mask{
+        width: 100%;
+        height: 100%;
+        background: rgba(25,25,25,0.8);
+        color: white;
+        padding: 10px;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s;
+    }
+    #content .contentMain .works .works_list li .mask .icon{
+        width: 32px;
+        height: 34px;
+        background-image: url("../../img/zoomico.png");
+        background-repeat:no-repeat;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom:0;
+        top:0;
+        margin: auto;
+    }
+    #content .contentMain .works .works_list li:hover .mask{
+        opacity: 1;
+    }
+    #content .contentMain .works .works_list li img{
+        transition: transform 1s;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    #content .contentMain .works .works_list li:hover img{
+        transform: rotate(30deg) scale(1.2);
+    }
+    #content .contentMain .works .works_list li:hover .mask .icon{
+        transition: background-position 1s;
+    }
+    #content .contentMain .works .works_list li:hover .icon{
+        background-position: 0 -35px;
+    }
+    #content .contentMain .works .works_robot{
+        width: 167px;
+        height: 191px;
+        position: absolute;
+        top: 170px;
+        left: 900px;
+        background-image: url("../../img/robot.png");
+        animation: robotMove linear infinite 5s;
+        z-index: 5;
+    }
+    @keyframes robotMove{
+        0%{ }
+        49%{ transform: translate(-400px)}
+        50%{transform: rotateY(180deg) translate(400px)}
+        100%{transform:rotateY(180deg) }
+    }
+    /*铅笔*/
+    .pencel1{ width:180px; height:97px; background:url(../../img/pencel1.png) no-repeat; position:absolute; transition:1s; left:500px; top:0;}
+    .pencel2{ width:268px; height:38px; background:url(../../img/pencel2.png) no-repeat; position:absolute; transition:1s; left:300px; top:250px;}
+    .pencel3{ width:441px; height:231px; background:url(../../img/pencel3.png) no-repeat; position:absolute; transition:1s; left:650px; top:300px;}
+
+    /*第四屏*/
+    #content .contentMain .about .about_title{
+        margin: 50px 0 100px 50px;
+    }
+    #content .contentMain .about .about_text{
+        width: 400px;
+        margin-left: 50px;
+    }
+    #content .contentMain .about .about_photo{
+        width: 260px;
+        height: 200px;
+        border:5px rgba(255,255,255,0.5) solid;
+        border-radius: 8px;
+        position: absolute;
+        z-index: 3;
+        transition: transform 1s;
+    }
+    #content .contentMain .about .about_photo:nth-child(3){
+        top: 50px;
+        left: 750px;
+    }
+    #content .contentMain .about .about_photo:nth-child(4){
+        top: 290px;
+        left: 600px;
+    }
+    #content .contentMain .about .about_photo ul{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top:0;
+        left: 0;
+        z-index: 3;
+    }
+    #content .contentMain .about .about_photo ul li{
+        width: 50%;
+        height: 50%;
+        float: left;
+        overflow: hidden;
+    }
+    #content .contentMain .about .about_photo:nth-child(3) ul li div{
+        width: 100%;
+        height: 100%;
+        background-image: url("../../img/about1.jpg");
+        background-repeat:no-repeat;
+        transition:transform 1s ;
+    }
+    #content .contentMain .about .about_photo:nth-child(4) ul li div{
+        width: 100%;
+        height: 100%;
+        background-image: url("../../img/about3.jpg");
+        background-repeat:no-repeat;
+        transition:transform 1s ;
+    }
+    #content .contentMain .about .about_photo ul li:nth-child(1) div{
+        background-position: 0 0;
+    }
+    #content .contentMain .about .about_photo ul li:nth-child(2) div{
+        background-position: 100% 0;
+    }
+    #content .contentMain .about .about_photo ul li:nth-child(3) div{
+        background-position: 0 100%;
+    }
+    #content .contentMain .about .about_photo ul li:nth-child(4) div{
+        background-position: 100% 100%;
+    }
+    #content .contentMain .about .about_photo:hover ul li:nth-child(1) div{
+        transform: translateY(100%);
+    }
+    #content .contentMain .about .about_photo:hover ul li:nth-child(2) div{
+        transform: translateX(-100%);
+    }
+    #content .contentMain .about .about_photo:hover ul li:nth-child(3) div{
+        transform: translateX(100%);
+    }
+    #content .contentMain .about .about_photo:hover ul li:nth-child(4) div{
+        transform: translateY(-100%);
+    }
+    #content .contentMain .about .about_line{
+        width: 357px;
+        height: 998px;
+        background-image: url("../../img/greenLine.png");
+        background-repeat:no-repeat;
+        position: absolute;
+        top: -12px;
+        left: 555px;
+    }
+      /*第五屏*/
+    #content .contentMain .team .team_title{
+        margin: 50px;
+        width: 400px;
+        float: left;
+        transition: transform 1s;
+    }
+    #content .contentMain .team .team_text{
+        margin: 50px;
+        width: 400px;
+        float: right;
+        transition: transform 1s;
+    }
+    #content .contentMain .team .team_list{
+        width: 944px;
+        height: 448px;
+        position:absolute;
+        top: 230px;
+        left: 50%;
+        margin-left: -472px;
+    }
+    #content .contentMain .team .team_list li{
+        width: 236px;
+        height: 100%;
+        background-image: url("../../img/team.png");
+        background-repeat:no-repeat;
+        float: left;
+    }
+    #content .contentMain .team .team_list li:nth-child(1){
+        background-position: 3px 0;
+    }
+    #content .contentMain .team .team_list li:nth-child(2){
+        background-position: -230px 0;
+    }
+    #content .contentMain .team .team_list li:nth-child(3){
+        background-position: -483px 0;
+    }
+    #content .contentMain .team .team_list li:nth-child(4){
+        background-position: -710px 0;
+    }
+    .navBar{
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .navBar li{
+        width: 15px;
+        height: 15px;
+        border: 1px #fff solid;
+        margin-top:10px;
+        border-radius: 50%;
+    }
+    .navBar .active{
+        background: white;
+    }
+    /*音乐*/
+      .music{
+          float: left;
+          width:14px;
+          height:14px;
+          margin:50px 0 0 5px;
+          cursor: pointer;
+          background-image: url(../../img/musicon.gif);
+      }
+
+      /*开机动画*/
+    #make{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 5;
+    }
+    #make .up{
+        width: 100%;
+        height: 50%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background:#009ee0;
+        transition: height 1s;
+    }
+    #make .down{
+        width: 100%;
+        height: 50%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background:#009ee0;
+        transition: height 1s;
+    }
+    #make .line{
+        width: 100%;
+        height: 5px;
+        background:#fff;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: width 1s;
+    }

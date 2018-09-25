@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background:gray;
+        }
+        #myCanvas{
+            background: #fff;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="200" height="400"></canvas>
+<script type="text/javascript">
+    var canvas=document.getElementById('myCanvas');
+    if(canvas.getContext){
+        var ctx=canvas.getContext('2d');
+        //创建一个空数组
+        var circleArr=[];
+        //定时器循环生成随机圆
+        setInterval(function () {
+            //颜色随机
+            var r=Math.round(Math.random()*255);
+            var g=Math.round(Math.random()*255);
+            var b=Math.round(Math.random()*255);
+            //半径随机
+            var arc=Math.round(Math.random()*8+2);
+            //起始位置随机
+            var x=Math.round(Math.random()*canvas.width);
+            var y=canvas.height+arc;
+            //缩放系数随机
+            var scale=Math.round(Math.random()*50+20);
+            var deg=0;
+            circleArr.push({
+                r:r,
+                g:g,
+                b:b,
+                arc:arc,
+                x:x,
+                y:y,
+                scale:scale,
+                deg:deg
+            })
+        },30);
+        //画圆
+        setInterval(function () {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            for (var i = 0; i < circleArr.length; i++) {
+                //获取每一个
+                var item=circleArr[i];
+                item.deg+=2;
+                    //转换弧度
+                var rad=item.deg*Math.PI/180;
+                //圆心坐标
+                var x=item.x+Math.round(Math.sin(rad)*item.scale);
+                var y=item.y-Math.round(rad*item.scale);
+                if(y<=0){
+                    circleArr.splice(i,1);
+                    continue;
+                }
+                  ctx.fillStyle='rgb('+ item.r+ ','+item.g +','+item.b +')';
+                  ctx.beginPath();
+                  ctx.arc(x,y,item.arc,0,2*Math.PI);
+                  ctx.fill();
+            }
+        },1000/60)
+    }
+</script>
+</body>
+</html>

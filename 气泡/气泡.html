@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #myCanvas{
+            background: #fff;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="400px" height="400px">
+    当前浏览器版本太低，请升级后浏览......
+</canvas>
+<script type="text/javascript">
+    var canvas=document.getElementById('myCanvas');
+    if(canvas.getContext){
+      var ctx=canvas.getContext('2d');
+      var circleArr=[];
+      setInterval(function () {
+          var r=Math.round(Math.random() * 255);
+          var g=Math.round(Math.random() * 255);
+          var b=Math.round(Math.random() * 255);
+          var x=Math.random() * canvas.width;
+          var y=Math.random() * canvas.height;
+          circleArr.push({
+              r : r,
+              g : g,
+              b : b,
+              a : 1,
+              x : x,
+              y : y,
+              c_r : 10
+          })
+      },20);
+      //画圆
+        setInterval(function () {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            for (var i = 0; i <circleArr.length; i++) {
+               //获取每一个圆
+                var item=circleArr[i];
+                //圆的半径增加
+                item.c_r++;
+                //透明度逐渐减小
+                item.a-=0.01;
+                //当透明度<=0时清除圆
+                if(item.a<=0.2){
+                    circleArr.splice(i,1);
+                  continue;
+                }
+                ctx.fillStyle='rgba('+item.r +','+item.g +','+ item.b+','+ item.a+')';
+                ctx.beginPath();
+                ctx.arc(item.x,item.y,item.c_r,0,2*Math.PI);
+                ctx.fill();
+            }
+        },20)
+    }
+</script>
+</body>
+</html>
